@@ -3,3 +3,11 @@ body {
   margin: 0 0;
   padding: 0 0;
 }
+.register-fields {
+  width: 100%;
+  background-color: transparent;
+}
+.location-fields {
+  width: 50%;
+  background-color: transparent;
+}

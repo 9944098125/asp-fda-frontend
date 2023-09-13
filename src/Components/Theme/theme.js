@@ -17,7 +17,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Prosto One, cursive",
+    fontFamily: "Oswald, sans-serif",
   },
 });
 
