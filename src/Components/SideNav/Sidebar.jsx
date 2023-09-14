@@ -16,7 +16,10 @@ function Sidebar() {
           display: "flex",
           alignItems: "center",
           gap: "0",
-          width: { xs: "8%", md: SidebarState.open ? "25%" : "7%" },
+          width: { xs: "8%", md: SidebarState.open ? "21%" : "7%" },
+          position: "fixed",
+          top: "0",
+          bottom: "0",
         }}>
         <Box
           sx={{
@@ -43,7 +46,7 @@ function Sidebar() {
             cursor: "pointer",
           }}>
           <Typography sx={{ color: "white", fontSize: "50px" }}>
-            {"<"}
+            {SidebarState.open ? "<" : ">"}
           </Typography>
         </Box>
       </Box>

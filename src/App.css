@@ -11,3 +11,6 @@ body {
   width: 50%;
   background-color: transparent;
 }
+#outlet::-webkit-scrollbar {
+  display: none;
+}
