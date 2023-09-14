@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Registration from "../Pages/Registration";
 import Home from "../Pages/Home";
+import SideNav from "../Components/SideNav";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <h1>SideNav</h1>,
+    element: <SideNav />,
     children: [
       {
         path: "/",
