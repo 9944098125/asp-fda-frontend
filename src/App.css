@@ -14,3 +14,12 @@ body {
 #outlet::-webkit-scrollbar {
   display: none;
 }
+.login-fields {
+  width: 100%;
+  background-color: transparent;
+  height: 45px;
+}
+.login-fields:active,
+.login-fields:focus {
+  height: 52px !important;
+}

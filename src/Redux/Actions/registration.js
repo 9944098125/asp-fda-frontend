@@ -27,6 +27,10 @@ export const registration = (body) => async (dispatch) => {
       type: REGISTRATION_FAIL,
       payload: err.response.data?.message,
     });
+    dispatch(alertActions.error(err.response?.data.message));
+    setTimeout(() => {
+      dispatch(alertActions.clear());
+    }, 3000);
     console.log(err);
   }
 };

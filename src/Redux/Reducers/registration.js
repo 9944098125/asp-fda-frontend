@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   message: "",
+  loading: false,
 };
 
 export default function registration(state = initialState, action) {
@@ -13,11 +14,16 @@ export default function registration(state = initialState, action) {
     case REGISTRATION_START:
       return {
         message: action.payload,
+        loading: true,
       };
     case REGISTRATION_SUCCESS:
+      return {
+        loadin: false,
+      };
     case REGISTRATION_FAIL:
       return {
         message: action.payload,
+        loading: false,
       };
     default:
       return state;

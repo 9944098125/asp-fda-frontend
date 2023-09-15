@@ -2,6 +2,7 @@ import React from "react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -16,6 +17,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { useSelector } from "react-redux";
 
 import Heading from "../../Components/Heading";
 import Input from "../../Components/Input";
@@ -33,6 +35,8 @@ function RegistrationForm(props) {
     isRestaurantOwner,
     toggleRestaurantOwner,
   } = props;
+
+  const RegistrationState = useSelector((state) => state.registration);
 
   // console.log(formik);
 
@@ -62,6 +66,7 @@ function RegistrationForm(props) {
             gap={{ xs: 1.5, md: 3 }}
             mb={{ xs: 1.5, md: 3 }}>
             <Input
+              variant="standard"
               label="First Name"
               type="text"
               name="firstName"
@@ -79,6 +84,7 @@ function RegistrationForm(props) {
             />
 
             <Input
+              variant="standard"
               label="Last Name"
               type="text"
               name="lastName"
@@ -100,6 +106,7 @@ function RegistrationForm(props) {
             gap={{ xs: 1.5, md: 3 }}
             mb={{ xs: 1.5, md: 3 }}>
             <Input
+              variant="standard"
               label="Email Address..."
               type="email"
               name="email"
@@ -217,6 +224,7 @@ function RegistrationForm(props) {
                 <MyLocationIcon />
               </Button>
               <Input
+                variant="standard"
                 label="City"
                 type="text"
                 name="city"
@@ -240,6 +248,7 @@ function RegistrationForm(props) {
               />
 
               <Input
+                variant="standard"
                 label="Country"
                 type="text"
                 name="country"
@@ -351,6 +360,9 @@ function RegistrationForm(props) {
                 "&:hover": { backgroundColor: "primary.dark", height: "50px" },
               }}>
               Register
+              {RegistrationState.loading && (
+                <CircularProgress sx={{ height: "10px" }} />
+              )}
             </Button>
           </Box>
         </form>

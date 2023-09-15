@@ -43,7 +43,6 @@ export default function Registration() {
   }
 
   const AlertState = useSelector((state) => state.alert);
-  const RegistrationState = useSelector((state) => state.registration);
 
   function changeImage(e) {
     setImage(e.target.files[0]);
