@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import FilterFramesIcon from "@mui/icons-material/FilterFrames";
 
 import { toggleSidebar } from "../../Redux/Actions/sidebar";
 import { customerItems, restaurantOwnerItems } from "./sidebarList";
@@ -22,6 +23,7 @@ function Sidebar() {
   const [openSidebar, setOpenSidebar] = React.useState(false);
 
   const SidebarState = useSelector((state) => state.sidebar);
+  const darkTheme = useSelector((state) => state.changeTheme);
   const user = JSON.parse(localStorage.getItem("fda-user"));
 
   const logoutUser = () => {
@@ -43,7 +45,7 @@ function Sidebar() {
         }}>
         <Box
           sx={{
-            backgroundColor: "primary.main",
+            backgroundColor: darkTheme.dark ? "secondary.main" : "primary.main",
             width: "100%",
             height: "100vh",
             borderRight: "2px solid black",
@@ -114,6 +116,34 @@ function Sidebar() {
                   </ListItem>
                 </Link>
               ))}
+            {!user?.isRestaurantOwner && user && (
+              <ListItem
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 3,
+                  p: 2,
+                  "&:hover": {
+                    backgroundColor: "white",
+                    borderRadius: "8px",
+                  },
+                }}>
+                <ListItemButton sx={{}}>
+                  <ListItemIcon>
+                    <FilterFramesIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      display: {
+                        xs: "none",
+                        md: SidebarState.open ? "block" : "none",
+                      },
+                    }}>
+                    Orders
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            )}
             {user && (
               <ListItem
                 onClick={logoutUser}
@@ -155,7 +185,7 @@ function Sidebar() {
             width: "40px",
             borderTopRightRadius: "4px",
             borderBottomRightRadius: "4px",
-            backgroundColor: "primary.main",
+            backgroundColor: darkTheme.dark ? "secondary.main" : "primary.main",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

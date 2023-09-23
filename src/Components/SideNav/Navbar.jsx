@@ -1,18 +1,30 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../Assets/logo.png";
 import { logout } from "../../Redux/Actions/login";
+import { changeTheme } from "../../Redux/Actions/theme";
+import useClickOutside from "../../Hooks/useClickOutside";
 
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const user = JSON.parse(localStorage.getItem("fda-user"));
   const [showUserMenu, setShowUserMenu] = React.useState(false);
+
+  const userMenuRef = React.useRef(null);
+
+  useClickOutside(userMenuRef, () => {
+    setShowUserMenu(false);
+  });
+
+  const darkTheme = useSelector((state) => state.changeTheme);
 
   function toggleUserMenu() {
     setShowUserMenu(!showUserMenu);
@@ -21,6 +33,10 @@ function Navbar() {
   const logoutUser = () => {
     dispatch(logout());
     navigate("/login");
+  };
+
+  const toggleTheme = () => {
+    dispatch(changeTheme());
   };
 
   const imgUrl = `http://localhost:5000/${user?.image}`;
@@ -39,7 +55,7 @@ function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           p: "0 15px",
-          backgroundColor: "primary.main",
+          backgroundColor: darkTheme.dark ? "secondary.main" : "primary.main",
           borderBottom: "2px solid black",
           zIndex: "10",
         }}>
@@ -63,7 +79,17 @@ function Navbar() {
         {/* theme changing icon, user avatar in the right corner */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
           {/* theme changing icons */}
-          <NightlightRoundIcon />
+          {darkTheme.dark ? (
+            <LightModeIcon
+              onClick={toggleTheme}
+              sx={{ cursor: "pointer", color: "white" }}
+            />
+          ) : (
+            <NightlightRoundIcon
+              onClick={toggleTheme}
+              sx={{ cursor: "pointer" }}
+            />
+          )}
           {user ? (
             <Box
               onClick={toggleUserMenu}
@@ -104,13 +130,16 @@ function Navbar() {
           )}
           {showUserMenu && (
             <Box
+              ref={userMenuRef}
               sx={{
                 position: "absolute",
                 top: "70px",
                 right: "15px",
                 borderRadius: "9px",
-                backgroundColor: "primary.main",
-                width: "120px",
+                backgroundColor: darkTheme.dark
+                  ? "secondary.main"
+                  : "primary.main",
+                width: user?.isRestaurantOwner ? "200px" : "120px",
                 border: "1px solid black",
                 p: 1.5,
               }}>
@@ -131,7 +160,7 @@ function Navbar() {
                   </Typography>
                 </Link>
               )}
-              <Divider />
+              <Divider sx={{ borderTop: "2px solid black" }} />
               <Typography
                 onClick={logoutUser}
                 sx={{ color: "white", fontSize: "23px", cursor: "pointer" }}>

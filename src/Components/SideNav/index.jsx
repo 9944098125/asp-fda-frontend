@@ -22,7 +22,8 @@ export default function SideNav() {
               paddingTop: "80px",
               overflowY: "scroll",
               width: "100%",
-              pl: { xs: "80px", md: SidebarState.open ? "300px" : "110px" },
+              pl: { xs: "80px", md: SidebarState.open ? "285px" : "105px" },
+              pt: { xs: "60px", md: "70px" },
             }}>
             <Outlet />
           </Box>

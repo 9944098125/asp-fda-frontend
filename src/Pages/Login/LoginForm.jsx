@@ -11,7 +11,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import Heading from "../../Components/Heading";
 import Input from "../../Components/Input";
-import GoogleLogin from "./GoogleLogin";
+// import GoogleLogin from "./GoogleLogin";
 
 function LoginForm(props) {
   const { formik, showPassword, toggleShowPassword } = props;
@@ -104,7 +104,7 @@ function LoginForm(props) {
             </Button>
           </Box>
         </form>
-        <GoogleLogin />
+        {/* <GoogleLogin /> */}
       </Box>
     </React.Fragment>
   );

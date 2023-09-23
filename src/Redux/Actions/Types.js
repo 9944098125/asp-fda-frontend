@@ -9,6 +9,8 @@ export const REGISTRATION_FAIL = "REGISTRATION_FAIL";
 
 // toggle sidebar type
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+// theme
+export const CHANGE_THEME = "CHANGE_THEME";
 // login
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
