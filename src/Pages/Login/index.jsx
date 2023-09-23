@@ -2,11 +2,13 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 
 import loginBg from "../../Assets/login-bg.jpg";
 import LoginForm from "./LoginForm";
+import { login } from "../../Redux/Actions/login";
+import ResponseModal from "../../Components/Modal";
 
 const validationSchema = Yup.object({
   email: Yup.string().required("Email is required").email("Invalid Email !"),
@@ -27,6 +29,9 @@ export default function Login() {
     setShowPassword(!showPassword);
   }
 
+  const AlertState = useSelector((state) => state.alert);
+  const LoginState = useSelector((state) => state.login);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -34,9 +39,20 @@ export default function Login() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      const body = {
+        email: values.email,
+        password: values.password,
+      };
+      dispatch(login(body));
     },
   });
+
+  React.useEffect(() => {
+    if (LoginState.isActive) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate, LoginState.isActive]);
 
   return (
     <React.Fragment>
@@ -61,6 +77,7 @@ export default function Login() {
             left: "0",
           },
         }}>
+        {AlertState.message && <ResponseModal show={true} />}
         <LoginForm
           formik={formik}
           showPassword={showPassword}

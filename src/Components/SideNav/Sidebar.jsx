@@ -9,18 +9,25 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import { toggleSidebar } from "../../Redux/Actions/sidebar";
 import { customerItems, restaurantOwnerItems } from "./sidebarList";
+import { logout } from "../../Redux/Actions/login";
 
 function Sidebar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openSidebar, setOpenSidebar] = React.useState(false);
 
   const SidebarState = useSelector((state) => state.sidebar);
   const user = JSON.parse(localStorage.getItem("fda-user"));
+
+  const logoutUser = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   return (
     <React.Fragment>
@@ -109,6 +116,7 @@ function Sidebar() {
               ))}
             {user && (
               <ListItem
+                onClick={logoutUser}
                 sx={{
                   display: "flex",
                   alignItems: "center",

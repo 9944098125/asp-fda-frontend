@@ -11,7 +11,11 @@ export const registration = (body) => async (dispatch) => {
     type: REGISTRATION_START,
   });
   try {
-    const res = await Api.post("/auth/registration", body);
+    const res = await Api.post("/auth/registration", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     if (res) {
       dispatch({
         type: REGISTRATION_SUCCESS,

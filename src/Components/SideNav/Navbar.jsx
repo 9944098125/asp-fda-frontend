@@ -2,16 +2,29 @@ import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../Assets/logo.png";
+import { logout } from "../../Redux/Actions/login";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("fda-user"));
   const [showUserMenu, setShowUserMenu] = React.useState(false);
 
   function toggleUserMenu() {
     setShowUserMenu(!showUserMenu);
   }
+
+  const logoutUser = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  const imgUrl = `http://localhost:5000/${user?.image}`;
+  // console.log(imgUrl);
 
   return (
     <React.Fragment>
@@ -54,12 +67,17 @@ function Navbar() {
           {user ? (
             <Box
               onClick={toggleUserMenu}
-              sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                cursor: "pointer",
+              }}>
               <Typography sx={{ color: "white", fontSize: "26px" }}>
                 {user?.firstName}
               </Typography>
               <img
-                src={user?.image}
+                src={imgUrl}
                 alt=""
                 height={50}
                 width={50}
@@ -93,6 +111,8 @@ function Navbar() {
                 borderRadius: "9px",
                 backgroundColor: "primary.main",
                 width: "120px",
+                border: "1px solid black",
+                p: 1.5,
               }}>
               <Link
                 to="/profile"
@@ -101,7 +121,7 @@ function Navbar() {
                   Profile
                 </Typography>
               </Link>
-              <Divider />
+              <Divider sx={{ borderTop: "2px solid black" }} />
               {user && user.isRestaurantOwner && (
                 <Link
                   to="/createRestaurant"
@@ -112,7 +132,9 @@ function Navbar() {
                 </Link>
               )}
               <Divider />
-              <Typography sx={{ color: "white", fontSize: "23px" }}>
+              <Typography
+                onClick={logoutUser}
+                sx={{ color: "white", fontSize: "23px", cursor: "pointer" }}>
                 Logout
               </Typography>
             </Box>
