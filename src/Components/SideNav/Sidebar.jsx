@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
-import FilterFramesIcon from "@mui/icons-material/FilterFrames";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { toggleSidebar } from "../../Redux/Actions/sidebar";
 import { customerItems, restaurantOwnerItems } from "./sidebarList";
@@ -117,32 +117,36 @@ function Sidebar() {
                 </Link>
               ))}
             {!user?.isRestaurantOwner && user && (
-              <ListItem
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 3,
-                  p: 2,
-                  "&:hover": {
-                    backgroundColor: "white",
-                    borderRadius: "8px",
-                  },
-                }}>
-                <ListItemButton sx={{}}>
-                  <ListItemIcon>
-                    <FilterFramesIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    sx={{
-                      display: {
-                        xs: "none",
-                        md: SidebarState.open ? "block" : "none",
-                      },
-                    }}>
-                    Orders
-                  </ListItemText>
-                </ListItemButton>
-              </ListItem>
+              <Link
+                to="/cart"
+                style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 3,
+                    p: 2,
+                    "&:hover": {
+                      backgroundColor: "white",
+                      borderRadius: "8px",
+                    },
+                  }}>
+                  <ListItemButton sx={{}}>
+                    <ListItemIcon>
+                      <ShoppingCartIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      sx={{
+                        display: {
+                          xs: "none",
+                          md: SidebarState.open ? "block" : "none",
+                        },
+                      }}>
+                      Cart
+                    </ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
             )}
             {user && (
               <ListItem

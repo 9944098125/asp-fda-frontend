@@ -5,6 +5,8 @@ import registration from "./registration";
 import sidebar from "./sidebar";
 import login from "./login";
 import changeTheme from "./theme";
+import restaurants from "./restaurants";
+import foodItems from "./foodItems";
 
 export default combineReducers({
   alert,
@@ -12,4 +14,6 @@ export default combineReducers({
   registration,
   login,
   changeTheme,
+  restaurants,
+  foodItems,
 });

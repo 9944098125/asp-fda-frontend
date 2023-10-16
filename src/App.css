@@ -23,3 +23,7 @@ body {
 .login-fields:focus {
   height: 52px !important;
 }
+.create-fields {
+  width: 100%;
+  background-color: transparent;
+}
