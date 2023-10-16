@@ -7,7 +7,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import { useSelector } from "react-redux";
 
 import UpdateRestaurantModal from "../../Pages/Restaurants/UpdateRestaurant";
-import { Modal } from "react-bootstrap";
+import DeleteModal from "../DeleteModal";
 
 export default function RestaurantItem(props) {
   const { restaurant, deleteRestaurant } = props;
@@ -25,6 +25,23 @@ export default function RestaurantItem(props) {
     bool: false,
     dataWithId: { ...oldData },
   });
+
+  const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+
+  const openDeleteModal = () => {
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  const deleteOnClick = (id) => {
+    deleteRestaurant(restaurant?._id);
+    setTimeout(() => {
+      closeDeleteModal();
+    }, 1000);
+  };
 
   const updateRestaurant = (restaurant) => {
     setShowUpdateModal({
@@ -204,7 +221,7 @@ export default function RestaurantItem(props) {
             />
 
             <Button
-              onClick={() => deleteRestaurant(restaurant?._id)}
+              onClick={openDeleteModal}
               sx={{
                 backgroundColor: "red",
                 color: "white",
@@ -217,6 +234,12 @@ export default function RestaurantItem(props) {
               }}>
               <DeleteIcon />
             </Button>
+            <DeleteModal
+              show={showDeleteModal}
+              close={closeDeleteModal}
+              module="Restaurant"
+              deleteOnClick={deleteOnClick}
+            />
           </Box>
         )}
       </Box>

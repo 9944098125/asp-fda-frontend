@@ -6,6 +6,8 @@ import {
   GET_ALL_FOOD_FAIL,
   GET_FOOD_BY_RESTAURANT_SUCCESS,
   GET_FOOD_BY_RESTAURANT_FAIL,
+  GET_FOOD_BY_ID_SUCCESS,
+  GET_FOOD_BY_ID_FAIL,
 } from "./Types";
 import Api from "../Api/Api";
 import { alertActions } from "./alert";
@@ -75,11 +77,29 @@ export const getFoodByRestaurant = (restaurantId) => async (dispatch) => {
         type: GET_FOOD_BY_RESTAURANT_SUCCESS,
         payload: res.data,
       });
-      console.log(res);
     }
   } catch (err) {
     dispatch({
       type: GET_FOOD_BY_RESTAURANT_FAIL,
+      payload: err.response?.data.message,
+    });
+  }
+};
+
+export const getFoodById = (foodItemId) => async (dispatch) => {
+  try {
+    const res = await Api.get(`/foodItems/${foodItemId}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res) {
+      dispatch({
+        type: GET_FOOD_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: GET_FOOD_BY_ID_FAIL,
       payload: err.response?.data.message,
     });
   }

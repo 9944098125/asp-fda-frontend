@@ -9,6 +9,8 @@ import {
   UPDATE_RESTAURANT_FAIL,
   UPDATE_RESTAURANT_START,
   UPDATE_RESTAURANT_SUCCESS,
+  GET_RESTAURANT_SUCCESS,
+  GET_RESTAURANT_FAIL,
 } from "./Types";
 import Api from "../Api/Api";
 import { alertActions } from "./alert";
@@ -42,6 +44,25 @@ export const createRestaurant = (body) => async (dispatch) => {
     setTimeout(() => {
       dispatch(alertActions.clear());
     }, 3000);
+  }
+};
+
+export const getRestaurantById = (restaurantId) => async (dispatch) => {
+  try {
+    const res = await Api.get(`/restaurants/${restaurantId}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res) {
+      dispatch({
+        type: GET_RESTAURANT_SUCCESS,
+        payload: res.data,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: GET_RESTAURANT_FAIL,
+      payload: err.response?.data.message,
+    });
   }
 };
 

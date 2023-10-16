@@ -15,6 +15,8 @@ export default function Home() {
   const FoodItemsState = useSelector((state) => state.foodItems);
 
   const darkTheme = useSelector((state) => state.changeTheme);
+  const SidebarState = useSelector((state) => state.sidebar);
+
   return (
     <React.Fragment>
       <Box
@@ -26,7 +28,7 @@ export default function Home() {
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
-          gap: 1.5,
+          gap: SidebarState.open ? 1 : 1.5,
           p: 2,
         }}>
         {FoodItemsState.foodItems.length > 0 ? (

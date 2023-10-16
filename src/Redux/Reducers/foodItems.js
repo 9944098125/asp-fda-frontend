@@ -6,10 +6,12 @@ import {
   GET_ALL_FOOD_FAIL,
   GET_FOOD_BY_RESTAURANT_SUCCESS,
   GET_FOOD_BY_RESTAURANT_FAIL,
+  GET_FOOD_BY_ID_SUCCESS,
 } from "../Actions/Types";
 
 const initialState = {
   foodItems: [],
+  foodItem: {},
   loading: false,
   message: "",
 };
@@ -32,6 +34,11 @@ export default function foodItems(state = initialState, action) {
         ...state,
         loading: false,
         message: action.payload,
+      };
+    case GET_FOOD_BY_ID_SUCCESS:
+      return {
+        ...state,
+        message: action.payload.message,
       };
     case GET_ALL_FOOD_SUCCESS:
       return {

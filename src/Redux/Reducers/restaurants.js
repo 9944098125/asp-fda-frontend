@@ -4,12 +4,15 @@ import {
   CREATE_RESTAURANT_FAIL,
   GET_ALL_RESTAURANTS_FAIL,
   GET_ALL_RESTAURANTS_SUCCESS,
+  GET_RESTAURANT_FAIL,
+  GET_RESTAURANT_SUCCESS,
 } from "../Actions/Types";
 
 const initialState = {
   loading: false,
   message: "",
   restaurants: [],
+  restaurant: {},
 };
 
 export default function restaurants(state = initialState, action) {
@@ -30,6 +33,16 @@ export default function restaurants(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        message: payload,
+      };
+    case GET_RESTAURANT_SUCCESS:
+      return {
+        ...state,
+        restaurant: payload.restaurant,
+      };
+    case GET_RESTAURANT_FAIL:
+      return {
+        ...state,
         message: payload,
       };
     case GET_ALL_RESTAURANTS_SUCCESS:

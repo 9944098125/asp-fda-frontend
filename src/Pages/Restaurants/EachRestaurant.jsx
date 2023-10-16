@@ -34,6 +34,8 @@ function EachRestaurant() {
   const FoodItemsState = useSelector((state) => state.foodItems);
 
   const darkTheme = useSelector((state) => state.changeTheme);
+  const SidebarState = useSelector((state) => state.sidebar);
+
   return (
     <React.Fragment>
       <Box
@@ -47,7 +49,7 @@ function EachRestaurant() {
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: 1.5,
+            gap: SidebarState.open ? 1 : 1.5,
             p: 2,
           }}>
           {FoodItemsState.foodItems.length > 0 ? (
