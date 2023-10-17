@@ -39,6 +39,7 @@ export default function foodItems(state = initialState, action) {
       return {
         ...state,
         message: action.payload.message,
+        foodItem: action.payload.foodItem,
       };
     case GET_ALL_FOOD_SUCCESS:
       return {

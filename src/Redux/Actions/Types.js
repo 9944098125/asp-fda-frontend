@@ -46,3 +46,8 @@ export const GET_RESTAURANT_FAIL = "GET_RESTAURANT_FAIL";
 // get food item by id
 export const GET_FOOD_BY_ID_SUCCESS = "GET_FOOD_BY_ID_SUCCESS";
 export const GET_FOOD_BY_ID_FAIL = "GET_FOOD_BY_ID_FAIL";
+// cart
+export const ADD_TO_CART = "ADD_ITEM_TO_CART";
+export const GET_CART_ITEMS = "GET_CART_ITEMS";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
