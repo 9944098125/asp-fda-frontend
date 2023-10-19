@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { getFoodByRestaurant } from "../../Redux/Actions/foodItems";
 import FoodItem from "../../Components/FoodItem";
 
-function EachRestaurant() {
+function EachRestaurant(props) {
   const dispatch = useDispatch();
   const params = useParams();
   const [showModal, setShowModal] = React.useState(false);
@@ -71,7 +71,7 @@ function EachRestaurant() {
             </Box>
           )}
         </Box>
-        {user && user.isRestaurantOwner && (
+        {user && user.isRestaurantOwner && props.mode !== "Particular" && (
           <Button
             onClick={openModal}
             sx={{

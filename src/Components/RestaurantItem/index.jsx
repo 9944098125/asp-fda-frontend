@@ -91,7 +91,7 @@ export default function RestaurantItem(props) {
                   variant="span"
                   sx={{
                     fontWeight: "700",
-                    color: "primary.dark",
+                    color: darkTheme.dark ? "white" : "black",
                     fontStyle: "normal",
                   }}>
                   {restaurant?.name}
@@ -108,7 +108,7 @@ export default function RestaurantItem(props) {
                   variant="span"
                   sx={{
                     fontWeight: "700",
-                    color: "primary.dark",
+                    color: darkTheme.dark ? "white" : "black",
                     fontStyle: "normal",
                   }}>
                   {restaurant?.cuisine}
@@ -125,7 +125,7 @@ export default function RestaurantItem(props) {
                   variant="span"
                   sx={{
                     fontWeight: "700",
-                    color: "primary.dark",
+                    color: darkTheme.dark ? "white" : "black",
                     fontStyle: "normal",
                   }}>
                   {restaurant?.address}
@@ -142,7 +142,7 @@ export default function RestaurantItem(props) {
                   variant="span"
                   sx={{
                     fontWeight: "700",
-                    color: "primary.dark",
+                    color: darkTheme.dark ? "white" : "black",
                     fontStyle: "normal",
                   }}>
                   {restaurant?.rating}

@@ -51,3 +51,19 @@ export const ADD_TO_CART = "ADD_ITEM_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
+// update food Item
+export const UPDATE_FOOD_START = "UPDATE_FOOD_START";
+export const UPDATE_FOOD_SUCCESS = "UPDATE_FOOD_SUCCESS";
+export const UPDATE_FOOD_FAIL = "UPDATE_FOOD_FAIL";
+// delete food item
+export const DELETE_FOOD_SUCCESS = "DELETE_FOOD_SUCCESS";
+export const DELETE_FOOD_FAIL = "DELETE_FOOD_FAIL";
+// get user by id
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAIL = "GET_USER_FAIL";
+// update user
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
+// delete user
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_FAIL = "DELETE_USER_FAIL";

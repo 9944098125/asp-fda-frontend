@@ -7,15 +7,15 @@ import login from "./login";
 import changeTheme from "./theme";
 import restaurants from "./restaurants";
 import foodItems from "./foodItems";
-import cart from "./cart";
+import users from "./users";
 
 export default combineReducers({
-  alert,
-  sidebar,
-  registration,
-  login,
-  changeTheme,
-  restaurants,
-  foodItems,
-  cart,
+	alert,
+	sidebar,
+	registration,
+	login,
+	changeTheme,
+	restaurants,
+	foodItems,
+	users,
 });

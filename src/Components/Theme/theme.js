@@ -4,16 +4,16 @@ import { colors } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      dark: colors.amber[800],
-      main: colors.amber[500],
-      light: colors.amber[100],
-      bg: colors.amber[50],
+      dark: colors.pink[800],
+      main: colors.pink[500],
+      light: colors.pink[100],
+      bg: colors.pink[50],
     },
     secondary: {
-      dark: colors.blueGrey[800],
-      main: colors.blueGrey[500],
-      light: colors.blueGrey[100],
-      bg: colors.blueGrey[50],
+      dark: colors.grey[800],
+      main: colors.grey[500],
+      light: colors.grey[100],
+      bg: colors.grey[50],
     },
   },
   typography: {

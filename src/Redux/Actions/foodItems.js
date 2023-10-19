@@ -8,6 +8,11 @@ import {
   GET_FOOD_BY_RESTAURANT_FAIL,
   GET_FOOD_BY_ID_SUCCESS,
   GET_FOOD_BY_ID_FAIL,
+  UPDATE_FOOD_START,
+  UPDATE_FOOD_SUCCESS,
+  UPDATE_FOOD_FAIL,
+  DELETE_FOOD_SUCCESS,
+  DELETE_FOOD_FAIL,
 } from "./Types";
 import Api from "../Api/Api";
 import { alertActions } from "./alert";
@@ -102,5 +107,70 @@ export const getFoodById = (foodItemId) => async (dispatch) => {
       type: GET_FOOD_BY_ID_FAIL,
       payload: err.response?.data.message,
     });
+  }
+};
+
+export const updateFood =
+  (body, foodItemId, restaurantId) => async (dispatch) => {
+    dispatch({
+      type: UPDATE_FOOD_START,
+    });
+    try {
+      const res = await Api.patch(
+        `/foodItems/updateFoodItem/${foodItemId}/${restaurantId}`,
+        body,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+      if (res) {
+        dispatch({
+          type: UPDATE_FOOD_SUCCESS,
+          payload: res.data,
+        });
+        dispatch(alertActions.success(res.data?.message));
+        setTimeout(() => {
+          dispatch(alertActions.clear());
+        }, 3000);
+      }
+    } catch (err) {
+      dispatch({
+        type: UPDATE_FOOD_FAIL,
+        payload: err.response?.data.message,
+      });
+      console.log(err);
+      dispatch(alertActions.error(err.response?.data.message));
+      setTimeout(() => {
+        dispatch(alertActions.clear());
+      }, 3000);
+    }
+  };
+
+export const deleteFood = (foodItemId, restaurantId) => async (dispatch) => {
+  try {
+    const res = await Api.delete(
+      `/foodItems/deleteFoodItem/${foodItemId}/${restaurantId}`,
+    );
+    if (res) {
+      dispatch({
+        type: DELETE_FOOD_SUCCESS,
+        payload: res.data?.message,
+      });
+      dispatch(alertActions.success(res.data?.message));
+      setTimeout(() => {
+        dispatch(alertActions.clear());
+      }, 3000);
+    }
+  } catch (err) {
+    dispatch({
+      type: DELETE_FOOD_FAIL,
+      payload: err.response?.data.message,
+    });
+    dispatch(alertActions.error(err.response?.data.message));
+    setTimeout(() => {
+      dispatch(alertActions.clear());
+    }, 3000);
   }
 };
