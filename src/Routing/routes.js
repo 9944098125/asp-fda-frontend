@@ -8,6 +8,7 @@ import CreateRestaurant from "../Pages/Restaurants/CreateRestaurant";
 import DisplayRestaurants from "../Pages/Restaurants/DisplayRestaurants";
 import EachRestaurant from "../Pages/Restaurants/EachRestaurant";
 import ParticularFoodItem from "../Pages/Restaurants/FoodItems/ParticularFoodItem";
+import Profile from "../Pages/Profile";
 
 const router = createBrowserRouter([
 	{
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/profile",
-				element: <h1>Profile</h1>,
+				element: <Profile />,
 			},
 			{
 				path: "/restaurants/:restaurantId/:foodItemId",

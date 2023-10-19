@@ -10,12 +10,15 @@ import logo from "../../Assets/logo.png";
 import { logout } from "../../Redux/Actions/login";
 import { changeTheme } from "../../Redux/Actions/theme";
 import useClickOutside from "../../Hooks/useClickOutside";
+import { getUserById } from "../../Redux/Actions/users";
 
 function Navbar() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const user = JSON.parse(localStorage.getItem("fda-user"));
+	const UsersState = useSelector((state) => state.users);
+
 	const [showUserMenu, setShowUserMenu] = React.useState(false);
 
 	const userMenuRef = React.useRef(null);
@@ -39,7 +42,13 @@ function Navbar() {
 		dispatch(changeTheme());
 	};
 
-	const imgUrl = `http://localhost:5000/${user?.image}`;
+	React.useEffect(() => {
+		dispatch(getUserById(user?._id));
+	}, [dispatch, user?._id]);
+
+	const imgUrl = `http://localhost:5000/${
+		UsersState.user?.image !== undefined ? UsersState.user?.image : user?.image
+	}`;
 	// console.log(imgUrl);
 
 	return (
