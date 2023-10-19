@@ -8,6 +8,12 @@ import FoodItem from "../../Components/FoodItem";
 export default function Home() {
 	const dispatch = useDispatch();
 
+	const [searchTerm, setSearchTerm] = React.useState("");
+
+	const changeSearchTerm = (e) => {
+		setSearchTerm(e.target.value);
+	};
+
 	React.useEffect(() => {
 		dispatch(getAllFood());
 	}, [dispatch]);
@@ -17,7 +23,9 @@ export default function Home() {
 	const darkTheme = useSelector((state) => state.changeTheme);
 	const SidebarState = useSelector((state) => state.sidebar);
 
-	const changeSearchTerm = () => {};
+	const filteredFoodItems = FoodItemsState.foodItems?.filter((item) =>
+		item?.name.toLowerCase().includes(searchTerm.toLowerCase()),
+	);
 
 	return (
 		<React.Fragment>
@@ -27,14 +35,19 @@ export default function Home() {
 					px: 10,
 					py: 3,
 					backgroundColor: darkTheme.dark ? "secondary.dark" : "primary.bg",
+					display: "flex",
+					justifyContent: "center",
 				}}
 			>
 				<TextField
+					InputProps={{ style: { color: darkTheme.dark ? "white" : "" } }}
 					name="search"
-					onChange={changeSearchTerm}
-					sx={{ width: "100%" }}
+					color="warning"
+					sx={{ width: "92%" }}
 					variant="outlined"
 					label="Search Food Items"
+					value={searchTerm}
+					onChange={changeSearchTerm}
 				/>
 			</Box>
 			<Box
@@ -50,8 +63,8 @@ export default function Home() {
 					p: 2,
 				}}
 			>
-				{FoodItemsState.foodItems.length > 0 ? (
-					FoodItemsState.foodItems.map((item, idx) => (
+				{filteredFoodItems.length > 0 ? (
+					filteredFoodItems.map((item, idx) => (
 						<FoodItem foodItem={item} key={idx} />
 					))
 				) : (

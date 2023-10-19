@@ -16,6 +16,12 @@ function DisplayRestaurants() {
 	const AlertState = useSelector((state) => state.alert);
 	const darkTheme = useSelector((state) => state.changeTheme);
 
+	const [searchTerm, setSearchTerm] = React.useState("");
+
+	const changeSearchTerm = (e) => {
+		setSearchTerm(e.target.value);
+	};
+
 	React.useEffect(() => {
 		dispatch(getAllRestaurants());
 	}, [dispatch]);
@@ -30,22 +36,29 @@ function DisplayRestaurants() {
 		}
 	}, [dispatch, AlertState.type]);
 
-	const changeSearchTerm = () => {};
+	const filteredRestaurants = RestaurantsState.restaurants?.filter((each) =>
+		each?.name.toLowerCase().includes(searchTerm.toLowerCase()),
+	);
 
 	return (
 		<React.Fragment>
 			<Box
 				sx={{
 					width: "100%",
-					px: 10,
+					px: 3,
 					py: 3,
 					backgroundColor: darkTheme.dark ? "secondary.dark" : "primary.bg",
 				}}
 			>
 				<TextField
-					name="search"
+					InputProps={{
+						style: { color: darkTheme.dark ? "white" : "" },
+					}}
+					name="searchTerm"
+					value={searchTerm}
 					onChange={changeSearchTerm}
 					sx={{ width: "100%" }}
+					color="warning"
 					variant="outlined"
 					label="Search Restaurants"
 				/>
@@ -58,7 +71,7 @@ function DisplayRestaurants() {
 				}}
 			>
 				{AlertState.message && <ResponseModal show={true} />}
-				{RestaurantsState.restaurants?.map((restaurant, idx) => (
+				{filteredRestaurants?.map((restaurant, idx) => (
 					<RestaurantItem
 						restaurant={restaurant}
 						deleteRestaurant={deleteOneRestaurant}

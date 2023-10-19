@@ -1,29 +1,29 @@
 *,
 body {
-  margin: 0 0;
-  padding: 0 0;
+	margin: 0 0;
+	padding: 0 0;
 }
 .register-fields {
-  width: 100%;
-  background-color: transparent;
+	width: 100%;
+	background-color: transparent;
 }
 .location-fields {
-  width: 50%;
-  background-color: transparent;
+	width: 50%;
+	background-color: transparent;
 }
 #outlet::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 .login-fields {
-  width: 100%;
-  background-color: transparent;
-  height: 45px;
+	width: 100%;
+	background-color: transparent;
+	height: 45px;
 }
 .login-fields:active,
 .login-fields:focus {
-  height: 52px !important;
+	height: 52px !important;
 }
 .create-fields {
-  width: 100%;
-  background-color: transparent;
+	width: 100%;
+	background-color: transparent;
 }
