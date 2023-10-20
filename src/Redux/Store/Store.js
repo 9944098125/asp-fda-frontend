@@ -9,18 +9,18 @@ import SetAuthToken from "../../Utils/SetAuthToken";
 const middleware = [thunk];
 
 const store = createStore(
-  rootReducer,
-  {},
-  composeWithDevTools(applyMiddleware(...middleware)),
+	rootReducer,
+	{},
+	composeWithDevTools(applyMiddleware(...middleware)),
 );
 
 let currentState;
 
 store.subscribe(() => {
-  // gets the present state of the store
-  currentState = store.getState();
-  const token = currentState.login.token;
-  SetAuthToken(token);
+	// gets the present state of the store
+	currentState = store.getState();
+	const token = currentState.login.token;
+	SetAuthToken(token);
 });
 
 export default store;

@@ -65,7 +65,7 @@ export default function Home() {
 			>
 				{filteredFoodItems.length > 0 ? (
 					filteredFoodItems.map((item, idx) => (
-						<FoodItem foodItem={item} key={idx} />
+						<FoodItem foodItem={item} idx={idx} key={idx} />
 					))
 				) : (
 					<Box

@@ -19,7 +19,7 @@ export const getUserById = (userId) => async (dispatch) => {
 				type: GET_USER_SUCCESS,
 				payload: res.data,
 			});
-			console.log(res.data);
+			// console.log(res.data);
 		}
 	} catch (err) {
 		dispatch({

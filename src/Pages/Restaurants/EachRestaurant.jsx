@@ -56,7 +56,7 @@ function EachRestaurant(props) {
 				>
 					{FoodItemsState.foodItems.length > 0 ? (
 						FoodItemsState.foodItems.map((item, idx) => (
-							<FoodItem foodItem={item} key={idx} />
+							<FoodItem foodItem={item} key={idx} idx={idx} />
 						))
 					) : (
 						<Box

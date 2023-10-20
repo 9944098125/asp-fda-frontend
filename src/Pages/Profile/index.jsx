@@ -17,6 +17,8 @@ export default function Profile() {
 	const user = JSON.parse(localStorage.getItem("foa-user"));
 	const darkTheme = useSelector((state) => state.changeTheme);
 	const AlertState = useSelector((state) => state.alert);
+	const LoginState = useSelector((state) => state.login);
+	// console.log(LoginState);
 
 	const UsersState = useSelector((state) => state.users);
 
@@ -69,11 +71,15 @@ export default function Profile() {
 		setTimeout(() => {
 			navigate("/login");
 		}, 3000);
+		LoginState.isActive = false;
 	};
 
 	React.useEffect(() => {
 		if (AlertState.type === "success") {
 			closeDeleteModal();
+			setTimeout(() => {
+				navigate("/");
+			}, 3000);
 		}
 	}, [AlertState.type, navigate]);
 

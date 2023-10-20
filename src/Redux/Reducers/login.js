@@ -7,7 +7,7 @@ import {
 
 const initialState = {
 	loading: false,
-	token: localStorage.getItem("fda-token"),
+	token: localStorage.getItem("foa-token"),
 	message: "",
 	isActive: false,
 	user: null,
