@@ -16,7 +16,7 @@ function Navbar() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const user = JSON.parse(localStorage.getItem("fda-user"));
+	const user = JSON.parse(localStorage.getItem("foa-user"));
 	const UsersState = useSelector((state) => state.users);
 
 	const [showUserMenu, setShowUserMenu] = React.useState(false);

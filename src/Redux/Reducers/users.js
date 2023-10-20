@@ -38,6 +38,9 @@ export default function users(state = initialState, action) {
 				message: action.payload,
 			};
 		case DELETE_USER_SUCCESS:
+			localStorage.removeItem("foa-token");
+			localStorage.removeItem("foa-user");
+			localStorage.removeItem("foa-active");
 			return {
 				...state,
 				user: null,

@@ -27,7 +27,7 @@ function ParticularFoodItem() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const user = JSON.parse(localStorage.getItem("fda-user"));
+	const user = JSON.parse(localStorage.getItem("foa-user"));
 
 	const RestaurantsState = useSelector((state) => state.restaurants);
 	const FoodItemsState = useSelector((state) => state.foodItems);

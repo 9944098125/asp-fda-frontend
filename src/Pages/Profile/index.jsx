@@ -3,41 +3,49 @@ import { Box, Button, Stack, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { getUserById, updateUser } from "../../Redux/Actions/users";
+import {
+	deleteUserById,
+	getUserById,
+	updateUser,
+} from "../../Redux/Actions/users";
 import ResponseModal from "../../Components/Modal";
+import DeleteModal from "../../Components/DeleteModal";
 
 export default function Profile() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const user = JSON.parse(localStorage.getItem("fda-user"));
+	const user = JSON.parse(localStorage.getItem("foa-user"));
 	const darkTheme = useSelector((state) => state.changeTheme);
 	const AlertState = useSelector((state) => state.alert);
 
 	const UsersState = useSelector((state) => state.users);
 
-	const [image, setImage] = React.useState(UsersState.user?.image);
+	const [image, setImage] = React.useState("");
 
 	const [imageChanging, setImageChanging] = React.useState(false);
+
+	const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+
+	const openDeleteModal = () => {
+		setShowDeleteModal(true);
+	};
+
+	const closeDeleteModal = () => {
+		setShowDeleteModal(false);
+	};
 
 	const changeImage = (e) => {
 		setImage(e.target.files[0]);
 		setImageChanging(true);
 	};
 
-	React.useEffect(() => {
-		dispatch(getUserById(user?._id));
-		if (!user) {
-			navigate("/");
-		}
-	}, [dispatch, user?._id, navigate, user]);
-
 	const formik = useFormik({
 		initialValues: {
-			userName: UsersState.user?.userName || user?.userName,
-			email: UsersState.user?.email || user?.email,
+			userName: "",
+			email: "",
 			location: {
-				city: UsersState.user?.location?.city || user?.location?.city,
-				country: UsersState.user?.location?.country || user?.location?.country,
+				city: "",
+				country: "",
 			},
 		},
 		onSubmit: (values) => {
@@ -50,10 +58,45 @@ export default function Profile() {
 				},
 				image: image,
 			};
-			dispatch(updateUser(body, user?._id));
+			// console.log(body);
+			dispatch(updateUser(body, user._id));
 		},
 		enableReinitialize: true,
 	});
+
+	const deleteOnClick = () => {
+		dispatch(deleteUserById(user._id));
+		setTimeout(() => {
+			navigate("/login");
+		}, 3000);
+	};
+
+	React.useEffect(() => {
+		if (AlertState.type === "success") {
+			closeDeleteModal();
+		}
+	}, [AlertState.type, navigate]);
+
+	React.useEffect(() => {
+		dispatch(getUserById(user?._id));
+		if (!user) {
+			navigate("/");
+		}
+	}, [dispatch, navigate]);
+
+	React.useEffect(() => {
+		if (UsersState.user) {
+			setImage(UsersState.user.image);
+			formik.setValues({
+				userName: UsersState.user.userName,
+				email: UsersState.user.email,
+				location: {
+					city: UsersState.user.location?.city,
+					country: UsersState.user.location?.country,
+				},
+			});
+		}
+	}, [UsersState.user?._id]);
 
 	return (
 		<React.Fragment>
@@ -125,6 +168,7 @@ export default function Profile() {
 
 						<Box sx={{ width: "100%", p: 1.5, mb: 3 }}>
 							<TextField
+								disabled
 								sx={{ width: "100%" }}
 								type="text"
 								name="city"
@@ -136,6 +180,7 @@ export default function Profile() {
 
 						<Box sx={{ width: "100%", p: 1.5, mb: 3 }}>
 							<TextField
+								disabled
 								sx={{ width: "100%" }}
 								type="text"
 								name="country"
@@ -159,6 +204,7 @@ export default function Profile() {
 								Update
 							</Button>
 							<Button
+								onClick={openDeleteModal}
 								type="button"
 								variant="contained"
 								sx={{
@@ -173,6 +219,12 @@ export default function Profile() {
 							>
 								Delete my Account
 							</Button>
+							<DeleteModal
+								show={showDeleteModal}
+								close={closeDeleteModal}
+								module="Account"
+								deleteOnClick={deleteOnClick}
+							/>
 						</Box>
 					</Box>
 				</Stack>

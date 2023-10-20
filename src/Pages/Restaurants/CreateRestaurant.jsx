@@ -86,7 +86,7 @@ function CreateRestaurant() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const user = JSON.parse(localStorage.getItem("fda-user"));
+	const user = JSON.parse(localStorage.getItem("foa-user"));
 
 	const [selectCuisine, setSelectCuisine] = React.useState("BREAKFAST");
 	const [selectRating, setSelectRating] = React.useState(1);

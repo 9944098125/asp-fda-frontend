@@ -34,6 +34,7 @@ export const updateUser = (body, userId) => async (dispatch) => {
 		const res = await Api.patch(`/auth/update/${userId}`, body, {
 			headers: { "Content-Type": "multipart/form-data" },
 		});
+		// console.log(body);
 		if (res) {
 			dispatch({
 				type: UPDATE_USER_SUCCESS,
@@ -56,9 +57,9 @@ export const updateUser = (body, userId) => async (dispatch) => {
 	}
 };
 
-export const deleteUser = (userId) => async (dispatch) => {
+export const deleteUserById = (userId) => async (dispatch) => {
 	try {
-		const res = await Api.patch(`/auth/delete/${userId}`);
+		const res = await Api.delete(`/auth/delete/${userId}`);
 		if (res) {
 			dispatch({
 				type: DELETE_USER_SUCCESS,
