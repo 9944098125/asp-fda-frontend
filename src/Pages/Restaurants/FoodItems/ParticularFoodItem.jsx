@@ -21,6 +21,11 @@ import DeleteModal from "../../../Components/DeleteModal";
 import { useFormik } from "formik";
 import UpdateFoodItem from "./UpdateFoodItem";
 import ResponseModal from "../../../Components/Modal";
+import {
+	addItem,
+	decrementQuantity,
+	incrementQuantity,
+} from "../../../Redux/Actions/cart";
 
 function ParticularFoodItem() {
 	const params = useParams();
@@ -45,6 +50,8 @@ function ParticularFoodItem() {
 		showUpdateModal && FoodItemsState.foodItem?.foodImage,
 	);
 	// console.log(FoodItemsState.foodItem);
+
+	const CartItems = useSelector((state) => state.cart);
 
 	const formik = useFormik({
 		initialValues: {
@@ -94,10 +101,23 @@ function ParticularFoodItem() {
 		navigate(`/restaurants/${params.restaurantId}`);
 	};
 
-	const addItemsToCart = () => {
+	let cartItem;
+	const addItemsToCart = (foodItem) => {
 		if (!user) {
 			navigate("/login");
 		}
+		const body = {
+			userId: user?._id,
+			foodItemId: foodItem?._id,
+			foodItemName: foodItem?.name,
+			foodItemPrice: foodItem?.price,
+			quantity: 1,
+		};
+		dispatch(addItem(body));
+		cartItem = CartItems.items?.find(
+			(item) => item.foodItemId === foodItem._id,
+		);
+		console.log(cartItem);
 	};
 
 	React.useEffect(() => {
@@ -114,7 +134,15 @@ function ParticularFoodItem() {
 			closeUpdateModal();
 			closeDeleteModal();
 		}
-	}, [dispatch, params, AlertState.type]);
+	}, [dispatch, params, AlertState.type, cartItem?.quantity]);
+
+	const increase = (foodItemId) => {
+		dispatch(incrementQuantity(foodItemId, user?._id));
+	};
+
+	const decrease = (foodItemId) => {
+		dispatch(decrementQuantity(foodItemId, user?._id));
+	};
 
 	return (
 		<React.Fragment>
@@ -214,7 +242,7 @@ function ParticularFoodItem() {
 							</Typography>
 							{!user && (
 								<Button
-									onClick={addItemsToCart}
+									onClick={() => addItemsToCart(FoodItemsState?.foodItem)}
 									type="button"
 									sx={{
 										backgroundColor: "primary.main",
@@ -227,26 +255,57 @@ function ParticularFoodItem() {
 										},
 									}}
 								>
-									+ Add To Cart
+									+ Login to use Cart
 								</Button>
 							)}
 							{user && !user.isRestaurantOwner && (
-								<Button
-									onClick={addItemsToCart}
-									type="submit"
-									sx={{
-										backgroundColor: "primary.main",
-										height: "40px",
-										width: "150px",
-										color: "white",
-										"&:hover": {
-											backgroundColor: "primary.dark",
-											height: "45px",
-										},
-									}}
-								>
-									+ Add To Cart
-								</Button>
+								<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+									{cartItem?.quantity > 0 ? (
+										<Box
+											sx={{
+												display: "flex",
+												alignItems: "center",
+												gap: 3,
+												p: 0.5,
+												backgroundColor: "black",
+												color: "white",
+												borderRadius: "9px",
+											}}
+										>
+											<button
+												type="button"
+												onClick={() => increase(FoodItemsState.foodItem?._id)}
+												className="btn btn-success"
+											>
+												+
+											</button>
+
+											<button
+												type="button"
+												onClick={() => decrease(FoodItemsState.foodItem?._id)}
+												className="btn btn-danger"
+											>
+												-
+											</button>
+										</Box>
+									) : (
+										<Button
+											onClick={() => addItemsToCart(FoodItemsState?.foodItem)}
+											type="button"
+											sx={{
+												backgroundColor: "primary.main",
+												height: "40px",
+												color: "white",
+												"&:hover": {
+													backgroundColor: "primary.dark",
+													height: "45px",
+												},
+											}}
+										>
+											+ Add to cart
+										</Button>
+									)}
+								</Box>
 							)}
 							{user && user.isRestaurantOwner && (
 								<Box

@@ -8,6 +8,7 @@ import changeTheme from "./theme";
 import restaurants from "./restaurants";
 import foodItems from "./foodItems";
 import users from "./users";
+import cart from "./cart";
 
 export default combineReducers({
 	alert,
@@ -18,4 +19,5 @@ export default combineReducers({
 	restaurants,
 	foodItems,
 	users,
+	cart,
 });

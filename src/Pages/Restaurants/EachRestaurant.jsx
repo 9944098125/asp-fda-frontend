@@ -52,6 +52,7 @@ function EachRestaurant(props) {
 						flexWrap: "wrap",
 						gap: SidebarState.open ? 1 : 1.5,
 						p: 2,
+						pt: 8,
 					}}
 				>
 					{FoodItemsState.foodItems.length > 0 ? (

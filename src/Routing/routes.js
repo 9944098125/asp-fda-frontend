@@ -9,6 +9,7 @@ import DisplayRestaurants from "../Pages/Restaurants/DisplayRestaurants";
 import EachRestaurant from "../Pages/Restaurants/EachRestaurant";
 import ParticularFoodItem from "../Pages/Restaurants/FoodItems/ParticularFoodItem";
 import Profile from "../Pages/Profile";
+import Cart from "../Pages/Cart";
 
 const router = createBrowserRouter([
 	{
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/cart",
-				element: <h1>Cart</h1>,
+				element: <Cart />,
 			},
 			{
 				path: "/restaurants",

@@ -21,6 +21,7 @@ export default function FoodItem(props) {
 						py: 2,
 						px: 1,
 						color: darkTheme.dark ? "white" : "black",
+						mt: idx % 2 !== 0 ? -5 : 2,
 					}}
 				>
 					<img

@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 import { toggleSidebar } from "../../Redux/Actions/sidebar";
 import { customerItems, restaurantOwnerItems } from "./sidebarList";
@@ -24,6 +24,7 @@ function Sidebar() {
 
 	const SidebarState = useSelector((state) => state.sidebar);
 	const darkTheme = useSelector((state) => state.changeTheme);
+	const CartItems = useSelector((state) => state.cart);
 	const user = JSON.parse(localStorage.getItem("foa-user"));
 
 	const logoutUser = () => {
@@ -143,7 +144,7 @@ function Sidebar() {
 								>
 									<ListItemButton sx={{}}>
 										<ListItemIcon>
-											<ShoppingCartIcon />
+											<ShoppingBasketIcon />
 										</ListItemIcon>
 										<ListItemText
 											sx={{
@@ -153,7 +154,7 @@ function Sidebar() {
 												},
 											}}
 										>
-											Cart
+											Cart {CartItems.items.length}
 										</ListItemText>
 									</ListItemButton>
 								</ListItem>

@@ -54,7 +54,6 @@ export default function Home() {
 				sx={{
 					width: "100%",
 					minHeight: "100vh",
-					overflowY: "scroll",
 					backgroundColor: darkTheme.dark ? "secondary.dark" : "primary.bg",
 					display: "flex",
 					justifyContent: "center",

@@ -46,11 +46,6 @@ export const GET_RESTAURANT_FAIL = "GET_RESTAURANT_FAIL";
 // get food item by id
 export const GET_FOOD_BY_ID_SUCCESS = "GET_FOOD_BY_ID_SUCCESS";
 export const GET_FOOD_BY_ID_FAIL = "GET_FOOD_BY_ID_FAIL";
-// cart
-export const ADD_TO_CART = "ADD_ITEM_TO_CART";
-export const GET_CART_ITEMS = "GET_CART_ITEMS";
-export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
 // update food Item
 export const UPDATE_FOOD_START = "UPDATE_FOOD_START";
 export const UPDATE_FOOD_SUCCESS = "UPDATE_FOOD_SUCCESS";
@@ -67,3 +62,11 @@ export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 // delete user
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
+// cart items
+export const ADD_ITEM = "ADD_ITEM";
+export const READ_ITEMS = "READ_ITEMS";
+export const UPDATE_ITEM = "UPDATE_ITEM";
+export const DELETE_ITEM = "DELETE_ITEM";
+// increment and decrement quantity
+export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
+export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
