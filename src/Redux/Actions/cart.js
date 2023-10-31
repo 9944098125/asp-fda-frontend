@@ -4,8 +4,10 @@ import {
 	DELETE_ITEM,
 	INCREMENT_QUANTITY,
 	DECREMENT_QUANTITY,
+	CLEAR_CART,
 } from "./Types";
 import Api from "../Api/Api";
+import { alertActions } from "./alert";
 
 export const addItem = (body) => async (dispatch) => {
 	try {
@@ -68,5 +70,22 @@ export const decrementQuantity = (foodItemId, userId) => async (dispatch) => {
 			type: DECREMENT_QUANTITY,
 			payload: foodItemId,
 		});
+	}
+};
+
+export const clearCart = (cartId) => async (dispatch) => {
+	try {
+		const res = await Api.delete("/cart/clearCart", { cartId: cartId });
+		if (res) {
+			dispatch({
+				type: CLEAR_CART,
+			});
+			dispatch(alertActions.success("Order Placed"));
+			setTimeout(() => {
+				dispatch(alertActions.clear());
+			}, 3000);
+		}
+	} catch (err) {
+		console.log(err);
 	}
 };

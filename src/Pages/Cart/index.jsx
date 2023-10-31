@@ -4,12 +4,18 @@ import { useNavigate } from "react-router-dom";
 import EastIcon from "@mui/icons-material/East";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useDispatch, useSelector } from "react-redux";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import {
+	clearCart,
 	decrementQuantity,
 	deleteItem,
 	getItems,
 	incrementQuantity,
 } from "../../Redux/Actions/cart";
+import { alertActions } from "../../Redux/Actions/alert";
+import ResponseModal from "../../Components/Modal";
+import Api from "../../Redux/Api/Api";
+import { CLEAR_CART } from "../../Redux/Actions/Types";
 
 export default function Cart() {
 	const navigate = useNavigate();
@@ -18,6 +24,10 @@ export default function Cart() {
 
 	const CartItems = useSelector((state) => state.cart.items);
 	const darkTheme = useSelector((state) => state.changeTheme);
+	const CartItemsState = useSelector((state) => state.cart);
+	const AlertState = useSelector((state) => state.alert);
+
+	console.log(CartItemsState);
 
 	const total = CartItems?.reduce(
 		(acc, item) => acc + item.foodItemPrice * item.quantity,
@@ -35,6 +45,10 @@ export default function Cart() {
 		dispatch(deleteItem(foodId, user?._id));
 	};
 
+	const placeOrder = async () => {
+		dispatch(clearCart(CartItemsState.cart?._id));
+	};
+
 	const increase = (foodItemId) => {
 		dispatch(incrementQuantity(foodItemId, user?._id));
 	};
@@ -45,6 +59,40 @@ export default function Cart() {
 			deleteCartItem(foodItemId);
 		}
 		dispatch(decrementQuantity(foodItemId, user?._id));
+	};
+
+	const initPayment = (data) => {
+		const options = {
+			key: "rzp_test_lMQ3GukvPtMgUp",
+			amount: data.amount,
+			currency: data.currency,
+			description: "Test Payment",
+			order_id: data.id,
+			handler: async (response) => {
+				try {
+					const { data } = await Api.post("/cart/verify-payment", response);
+					console.log(data);
+				} catch (err) {
+					console.log(err);
+				}
+			},
+			theme: {
+				color: "cyan",
+			},
+		};
+		const myPay = new window.Razorpay(options);
+		myPay.open();
+		placeOrder();
+	};
+
+	const handlePayment = async () => {
+		try {
+			const { data } = await Api.post("/cart/payment", { amount: total });
+			// console.log(data);
+			initPayment(data.data);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -61,6 +109,7 @@ export default function Cart() {
 					alignItems: "center",
 				}}
 			>
+				{AlertState.message && <ResponseModal show={true} />}
 				<Typography variant="h2">Saved Food Items</Typography>
 				<Box
 					sx={{
@@ -157,6 +206,7 @@ export default function Cart() {
 								<EastIcon />
 							</Typography>
 							<Typography sx={{}}>
+								<CurrencyRupeeIcon />
 								{item.quantity * Number(item.foodItemPrice)}
 							</Typography>
 							<Box
@@ -198,10 +248,26 @@ export default function Cart() {
 					</Typography>
 				)}
 				{CartItems.length > 0 && (
-					<p>{total}</p>
-					// <Elements stripe={stripePromise}>
-					// 	<Payment total={total} clientSecret={clientSecret} />
-					// </Elements>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+						}}
+					>
+						<Button
+							onClick={handlePayment}
+							type="button"
+							sx={{
+								backgroundColor: "primary.main",
+								color: "white",
+								"&:hover": { backgroundColor: "primary.dark" },
+							}}
+						>
+							Pay
+						</Button>
+						{CartItems.length > 0 && <p>{total}</p>}
+					</Box>
 				)}
 			</Box>
 		</React.Fragment>
