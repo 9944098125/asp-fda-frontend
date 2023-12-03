@@ -10,6 +10,7 @@ import EachRestaurant from "../Pages/Restaurants/EachRestaurant";
 import ParticularFoodItem from "../Pages/Restaurants/FoodItems/ParticularFoodItem";
 import Profile from "../Pages/Profile";
 import Cart from "../Pages/Cart";
+import PowerBi from "../Pages/PowerBi";
 
 const router = createBrowserRouter([
 	{
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
 			{
 				path: "/restaurants/:restaurantId/:foodItemId",
 				element: <ParticularFoodItem />,
+			},
+			{
+				path: "/power-bi",
+				element: <PowerBi />,
 			},
 		],
 	},

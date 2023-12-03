@@ -14,10 +14,11 @@ export default function FoodItem(props) {
 			>
 				<Box
 					sx={{
-						width: "380px",
-						height: idx % 2 === 0 ? "370px" : "460px",
+						width: { xs: "250px", sm: "280px", md: "380px" },
+						// height: idx % 2 === 0 ? "370px" : "460px",
 						borderRadius: "9px",
 						boxShadow: "1px 2px 2px 1px grey",
+						mb: { xs: "25px", sm: "40px" },
 						py: 2,
 						px: 1,
 						color: darkTheme.dark ? "white" : "black",

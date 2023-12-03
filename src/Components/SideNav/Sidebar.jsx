@@ -39,7 +39,11 @@ function Sidebar() {
 					display: "flex",
 					alignItems: "center",
 					gap: "0",
-					width: { xs: "8%", md: SidebarState.open ? "21%" : "7%" },
+					width: {
+						xs: "70px",
+						sm: "12%",
+						md: SidebarState.open ? "21%" : "8%",
+					},
 					position: "fixed",
 					top: "0",
 					bottom: "0",
@@ -212,7 +216,13 @@ function Sidebar() {
 						ml: -0.2,
 					}}
 				>
-					<Typography sx={{ color: "white", fontSize: "50px" }}>
+					<Typography
+						sx={{
+							color: "white",
+							fontSize: "50px",
+							display: { sm: "none", md: "block" },
+						}}
+					>
 						{SidebarState.open ? "<" : ">"}
 					</Typography>
 				</Box>

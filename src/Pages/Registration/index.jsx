@@ -28,6 +28,7 @@ const validationSchema = Yup.object({
 		city: Yup.string().required("City is required"),
 		country: Yup.string().required("Country is required"),
 	}),
+	address: Yup.string().required("Address is required"),
 });
 
 export default function Registration() {
@@ -59,6 +60,7 @@ export default function Registration() {
 				city: "",
 				country: "",
 			},
+			address: "",
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
@@ -72,6 +74,7 @@ export default function Registration() {
 				},
 				image: image,
 				isRestaurantOwner: isRestaurantOwner,
+				deliveryAddress: values.address,
 			};
 			// console.log(image);
 			dispatch(registration(body));

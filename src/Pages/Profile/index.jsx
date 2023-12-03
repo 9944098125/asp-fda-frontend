@@ -49,6 +49,7 @@ export default function Profile() {
 				city: "",
 				country: "",
 			},
+			address: "",
 		},
 		onSubmit: (values) => {
 			const body = {
@@ -59,6 +60,7 @@ export default function Profile() {
 					country: values.location?.country,
 				},
 				image: image,
+				deliveryAddress: values.address,
 			};
 			// console.log(body);
 			dispatch(updateUser(body, user._id));
@@ -100,6 +102,7 @@ export default function Profile() {
 					city: UsersState.user.location?.city,
 					country: UsersState.user.location?.country,
 				},
+				address: UsersState.user.deliveryAddress,
 			});
 		}
 	}, [UsersState.user?._id]);
@@ -179,6 +182,19 @@ export default function Profile() {
 								type="text"
 								name="city"
 								value={formik.values.location?.city}
+								onChange={formik.handleChange}
+								variant="outlined"
+							/>
+						</Box>
+
+						<Box sx={{ width: "100%", p: 1.5, mb: 3 }}>
+							<TextField
+								multiline
+								rows={3}
+								sx={{ width: "100%" }}
+								type="text"
+								name="address"
+								value={formik.values.address}
 								onChange={formik.handleChange}
 								variant="outlined"
 							/>

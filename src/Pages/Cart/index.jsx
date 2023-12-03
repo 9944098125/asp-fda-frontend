@@ -27,7 +27,10 @@ export default function Cart() {
 	const CartItemsState = useSelector((state) => state.cart);
 	const AlertState = useSelector((state) => state.alert);
 
-	console.log(CartItemsState);
+	const [paymentDone, setPaymentDone] = React.useState(false);
+
+	// console.log(CartItemsState);
+	// console.log(CartItems.length);
 
 	const total = CartItems?.reduce(
 		(acc, item) => acc + item.foodItemPrice * item.quantity,
@@ -46,6 +49,7 @@ export default function Cart() {
 	};
 
 	const placeOrder = async () => {
+		// console.log(CartItemsState.cart?._id);
 		dispatch(clearCart(CartItemsState.cart?._id));
 	};
 
@@ -72,6 +76,8 @@ export default function Cart() {
 				try {
 					const { data } = await Api.post("/cart/verify-payment", response);
 					console.log(data);
+					placeOrder();
+					setPaymentDone(true);
 				} catch (err) {
 					console.log(err);
 				}
@@ -82,7 +88,6 @@ export default function Cart() {
 		};
 		const myPay = new window.Razorpay(options);
 		myPay.open();
-		placeOrder();
 	};
 
 	const handlePayment = async () => {
@@ -173,7 +178,7 @@ export default function Cart() {
 						Remove
 					</Typography>
 				</Box>
-				{CartItems ? (
+				{CartItems?.length > 0 ? (
 					CartItems.map((item, idx) => (
 						<Box
 							key={idx}
@@ -228,7 +233,11 @@ export default function Cart() {
 								</button>
 								{item.quantity}
 								<button
-									onClick={() => decrease(item.foodItemId)}
+									onClick={
+										item.quantity > 1
+											? () => decrease(item.foodItemId)
+											: () => deleteCartItem(item.foodItemId)
+									}
 									className="btn btn-danger"
 								>
 									-
@@ -247,12 +256,21 @@ export default function Cart() {
 						No Food Items in the Cart
 					</Typography>
 				)}
+				{paymentDone && (
+					<Box sx={{ display: "flex", justifyContent: "center", width: "70%" }}>
+						<Typography sx={{ fontSize: "45px", color: "deeppink" }}>
+							Payment Done successfully !!! Now the order will be at your
+							doorstep ([{user.deliveryAddress}] in 41 mins...)
+						</Typography>
+					</Box>
+				)}
 				{CartItems.length > 0 && (
 					<Box
 						sx={{
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "space-between",
+							width: "70%",
 						}}
 					>
 						<Button
@@ -261,12 +279,23 @@ export default function Cart() {
 							sx={{
 								backgroundColor: "primary.main",
 								color: "white",
-								"&:hover": { backgroundColor: "primary.dark" },
+								height: "45px",
+								"&:hover": { backgroundColor: "primary.dark", height: "50px" },
+								width: "50%",
 							}}
 						>
 							Pay
 						</Button>
-						{CartItems.length > 0 && <p>{total}</p>}
+						<Typography
+							sx={{
+								fontSize: "55px",
+								fontWeight: "800",
+								color: "primary.main",
+							}}
+						>
+							<CurrencyRupeeIcon sx={{ fontSize: "50px", color: "black" }} />
+							{total}
+						</Typography>
 					</Box>
 				)}
 			</Box>

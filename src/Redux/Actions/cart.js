@@ -75,8 +75,11 @@ export const decrementQuantity = (foodItemId, userId) => async (dispatch) => {
 
 export const clearCart = (cartId) => async (dispatch) => {
 	try {
-		const res = await Api.delete("/cart/clearCart", { cartId: cartId });
+		const res = await Api.delete(`/cart/clearCart/${cartId}`, {
+			headers: { "Content-Type": "application/json" },
+		});
 		if (res) {
+			// console.log(cartId);
 			dispatch({
 				type: CLEAR_CART,
 			});
