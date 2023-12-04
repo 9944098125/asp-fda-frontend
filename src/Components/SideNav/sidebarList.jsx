@@ -40,4 +40,9 @@ export const restaurantOwnerItems = [
 		text: "Create Restaurant",
 		link: "/createRestaurant",
 	},
+	{
+		icon: <ModeStandbyIcon />,
+		text: "Power Bi",
+		link: "/power-bi",
+	},
 ];
