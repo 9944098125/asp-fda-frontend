@@ -244,15 +244,6 @@ function RegistrationForm(props) {
 										? "form-control is-invalid location-fields"
 										: "form-control location-fields"
 								}
-								error={
-									formik.touched.location?.city &&
-									Boolean(formik.errors.location?.city)
-								}
-								helperText={
-									formik.touched.location?.city &&
-									Boolean(formik.errors.location?.city) &&
-									formik.errors.location?.city
-								}
 							/>
 
 							<Input
@@ -266,15 +257,6 @@ function RegistrationForm(props) {
 									Boolean(formik.errors.location?.country)
 										? "form-control is-invalid location-fields"
 										: "form-control location-fields"
-								}
-								error={
-									formik.touched.location?.country &&
-									Boolean(formik.errors.location?.country)
-								}
-								helperText={
-									formik.touched.location?.country &&
-									Boolean(formik.errors.location?.country) &&
-									formik.errors.location?.country
 								}
 								formik={formik}
 							/>

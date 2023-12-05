@@ -24,10 +24,6 @@ const validationSchema = Yup.object({
 	confirmPassword: Yup.string()
 		.required("Confirm Your Password")
 		.oneOf([Yup.ref("password"), null], "Your Passwords are not matching"),
-	location: Yup.object({
-		city: Yup.string().required("City is required"),
-		country: Yup.string().required("Country is required"),
-	}),
 	address: Yup.string().required("Address is required"),
 });
 
