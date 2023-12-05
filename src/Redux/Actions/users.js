@@ -32,7 +32,7 @@ export const getUserById = (userId) => async (dispatch) => {
 export const updateUser = (body, userId) => async (dispatch) => {
 	try {
 		const res = await Api.patch(`/auth/update/${userId}`, body, {
-			headers: { "Content-Type": "multipart/form-data" },
+			headers: { "Content-Type": "application/json" },
 		});
 		// console.log(body);
 		if (res) {

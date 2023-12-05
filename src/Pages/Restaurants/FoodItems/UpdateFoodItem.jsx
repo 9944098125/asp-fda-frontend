@@ -95,7 +95,7 @@ function UpdateFoodItem(props) {
 								type="file"
 								name="foodImage"
 								value={formik.values.foodImage}
-								onChange={changeFoodImage}
+								onChange={(e) => changeFoodImage(e.target.files[0])}
 								variant="outlined"
 								label="Food Item Image"
 								error={

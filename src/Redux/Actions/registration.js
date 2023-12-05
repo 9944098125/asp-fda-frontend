@@ -13,7 +13,7 @@ export const registration = (body) => async (dispatch) => {
 	try {
 		const res = await Api.post("/auth/registration", body, {
 			headers: {
-				"Content-Type": "multipart/form-data",
+				"Content-Type": "application/json",
 			},
 		});
 		if (res) {

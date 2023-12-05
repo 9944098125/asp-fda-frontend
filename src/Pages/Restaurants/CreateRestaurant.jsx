@@ -92,6 +92,7 @@ function CreateRestaurant() {
 	const [selectRating, setSelectRating] = React.useState(1);
 
 	const [restaurantLogo, setRestaurantLogo] = React.useState();
+	const [uploadingLogo, setUploadingLogo] = React.useState(false);
 
 	const RestaurantsState = useSelector((state) => state.restaurants);
 	const AlertState = useSelector((state) => state.alert);
@@ -103,6 +104,39 @@ function CreateRestaurant() {
 	function handleSelectRating(e) {
 		setSelectRating(e.target.value);
 	}
+
+	const changeImage = async (file) => {
+		setUploadingLogo(true);
+		if (file === null) {
+			return;
+		} else if (
+			file.type === "image/jpeg" ||
+			"image/jpg" ||
+			"image/png" ||
+			"image.svg" ||
+			"image/gfif"
+		) {
+			const imgData = new FormData();
+			imgData.append("file", file);
+			imgData.append("upload_preset", "save_qa");
+			imgData.append("cloud_name", "dakda5ni3");
+			await fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
+				method: "POST",
+				body: imgData,
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					// console.log(data);
+					setRestaurantLogo(data.url);
+					setUploadingLogo(false);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			return;
+		}
+	};
 
 	const formik = useFormik({
 		initialValues: {
@@ -125,10 +159,6 @@ function CreateRestaurant() {
 	});
 
 	const darkTheme = useSelector((state) => state.changeTheme);
-
-	function restaurantLogoChange(e) {
-		setRestaurantLogo(e.target.files[0]);
-	}
 
 	React.useEffect(() => {
 		if (!user || !user?.isRestaurantOwner) {
@@ -283,7 +313,7 @@ function CreateRestaurant() {
 									style: { color: darkTheme.dark ? "white" : "" },
 								}}
 								name="restaurantLogo"
-								onChange={restaurantLogoChange}
+								onChange={(e) => changeImage(e.target.files[0])}
 								variant="outlined"
 								type="file"
 								className="form-control create-fields"
@@ -295,6 +325,7 @@ function CreateRestaurant() {
 					</Stack>
 					<Button
 						type="submit"
+						disabled={uploadingLogo}
 						sx={{
 							backgroundColor: "primary.main",
 							height: "45px",

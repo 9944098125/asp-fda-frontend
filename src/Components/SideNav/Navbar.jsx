@@ -46,9 +46,6 @@ function Navbar() {
 		dispatch(getUserById(user?._id));
 	}, [dispatch, user?._id]);
 
-	const imgUrl = `http://localhost:5000/${
-		UsersState.user?.image !== undefined ? UsersState.user?.image : user?.image
-	}`;
 	// console.log(imgUrl);
 
 	return (
@@ -121,7 +118,11 @@ function Navbar() {
 							}}
 						>
 							<img
-								src={imgUrl}
+								src={
+									UsersState.user?.image !== undefined
+										? UsersState.user?.image
+										: user?.image
+								}
 								alt=""
 								height={70}
 								width={70}

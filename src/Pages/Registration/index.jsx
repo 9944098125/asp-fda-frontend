@@ -38,6 +38,7 @@ export default function Registration() {
 	const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 	const [image, setImage] = React.useState();
 	const [isRestaurantOwner, setIsRestaurantOwner] = React.useState(false);
+	const [imageUploadLoading, setImageUploadLoading] = React.useState(false);
 
 	function toggleRestaurantOwner(e) {
 		setIsRestaurantOwner(e.target.value === "true");
@@ -45,9 +46,38 @@ export default function Registration() {
 
 	const AlertState = useSelector((state) => state.alert);
 
-	function changeImage(e) {
-		setImage(e.target.files[0]);
-	}
+	const changeImage = async (file) => {
+		setImageUploadLoading(true);
+		if (file === null) {
+			return;
+		} else if (
+			file.type === "image/jpeg" ||
+			"image/jpg" ||
+			"image/png" ||
+			"image.svg" ||
+			"image/gfif"
+		) {
+			const imgData = new FormData();
+			imgData.append("file", file);
+			imgData.append("upload_preset", "save_qa");
+			imgData.append("cloud_name", "dakda5ni3");
+			await fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
+				method: "POST",
+				body: imgData,
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					// console.log(data);
+					setImage(data.url);
+					setImageUploadLoading(false);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			return;
+		}
+	};
 
 	const formik = useFormik({
 		initialValues: {
@@ -152,6 +182,7 @@ export default function Registration() {
 					changeImage={changeImage}
 					isRestaurantOwner={isRestaurantOwner}
 					toggleRestaurantOwner={toggleRestaurantOwner}
+					imageUploadLoading={imageUploadLoading}
 				/>
 			</Box>
 		</React.Fragment>

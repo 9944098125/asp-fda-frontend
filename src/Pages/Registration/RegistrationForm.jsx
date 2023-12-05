@@ -34,6 +34,7 @@ function RegistrationForm(props) {
 		image,
 		isRestaurantOwner,
 		toggleRestaurantOwner,
+		imageUploadLoading,
 	} = props;
 
 	const RegistrationState = useSelector((state) => state.registration);
@@ -308,7 +309,7 @@ function RegistrationForm(props) {
 							>
 								{image && (
 									<img
-										src={URL.createObjectURL(image)}
+										src={image}
 										alt=""
 										style={{
 											height: "100%",
@@ -330,7 +331,7 @@ function RegistrationForm(props) {
 								id="image"
 								type="file"
 								name="image"
-								onChange={changeImage}
+								onChange={(e) => changeImage(e.target.files[0])}
 							/>
 						</label>
 
@@ -380,6 +381,7 @@ function RegistrationForm(props) {
 							label="Address"
 							variant="standard"
 							onChange={formik.handleChange}
+							sx={{ width: "100%" }}
 						/>
 					</Box>
 					<Box sx={{ p: 2 }}>
@@ -392,6 +394,7 @@ function RegistrationForm(props) {
 								width: "100%",
 								"&:hover": { backgroundColor: "primary.dark", height: "50px" },
 							}}
+							disabled={imageUploadLoading}
 						>
 							Register
 							{RegistrationState.loading && (

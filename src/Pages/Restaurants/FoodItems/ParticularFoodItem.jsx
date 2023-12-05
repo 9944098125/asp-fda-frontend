@@ -39,16 +39,43 @@ function ParticularFoodItem() {
 	const AlertState = useSelector((state) => state.alert);
 	const darkTheme = useSelector((state) => state.changeTheme);
 
-	const logoUrl = `http://localhost:5000/${RestaurantsState.restaurant?.logo}`;
-
-	const foodItemImage = `http://localhost:5000/${FoodItemsState.foodItem?.foodImage}`;
-
 	const [showUpdateModal, setShowUpdateModal] = React.useState(false);
 	const [showDeleteModal, setShowDeleteModal] = React.useState(false);
 
 	const [foodImage, setFoodImage] = React.useState(
 		showUpdateModal && FoodItemsState.foodItem?.foodImage,
 	);
+
+	const changeImage = async (file) => {
+		if (file === null) {
+			return;
+		} else if (
+			file.type === "image/jpeg" ||
+			"image/jpg" ||
+			"image/png" ||
+			"image.svg" ||
+			"image/gfif"
+		) {
+			const imgData = new FormData();
+			imgData.append("file", file);
+			imgData.append("upload_preset", "save_qa");
+			imgData.append("cloud_name", "dakda5ni3");
+			await fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
+				method: "POST",
+				body: imgData,
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					// console.log(data);
+					setFoodImage(data.url);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			return;
+		}
+	};
 	// console.log(FoodItemsState.foodItem);
 
 	const CartItems = useSelector((state) => state.cart);
@@ -74,10 +101,6 @@ function ParticularFoodItem() {
 		},
 		enableReinitialize: true,
 	});
-
-	const changeFoodImage = (e) => {
-		setFoodImage(e.target.files[0]);
-	};
 
 	const openUpdateModal = () => {
 		setShowUpdateModal(true);
@@ -165,7 +188,7 @@ function ParticularFoodItem() {
 						>
 							<Box sx={{ height: "450px", width: "100%" }}>
 								<img
-									src={logoUrl}
+									src={RestaurantsState.restaurant?.logo}
 									alt=""
 									style={{
 										height: "100%",
@@ -332,7 +355,7 @@ function ParticularFoodItem() {
 										formik={formik}
 										show={showUpdateModal}
 										close={closeUpdateModal}
-										changeFoodImage={changeFoodImage}
+										changeFoodImage={changeImage}
 									/>
 									<Button
 										onClick={openDeleteModal}
@@ -356,7 +379,7 @@ function ParticularFoodItem() {
 						</Box>
 						<Box sx={{ height: "100%", width: "50%" }}>
 							<img
-								src={foodItemImage}
+								src={FoodItemsState.foodItem?.foodImage}
 								alt="Upload a Food Item"
 								style={{ height: "100%", width: "100%", borderRadius: "9px" }}
 							/>

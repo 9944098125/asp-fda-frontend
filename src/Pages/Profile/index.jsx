@@ -36,9 +36,37 @@ export default function Profile() {
 		setShowDeleteModal(false);
 	};
 
-	const changeImage = (e) => {
-		setImage(e.target.files[0]);
+	const changeImage = async (file) => {
 		setImageChanging(true);
+		if (file === null) {
+			return;
+		} else if (
+			file.type === "image/jpeg" ||
+			"image/jpg" ||
+			"image/png" ||
+			"image.svg" ||
+			"image/gfif"
+		) {
+			const imgData = new FormData();
+			imgData.append("file", file);
+			imgData.append("upload_preset", "save_qa");
+			imgData.append("cloud_name", "dakda5ni3");
+			await fetch("https://api.cloudinary.com/v1_1/dakda5ni3/image/upload", {
+				method: "POST",
+				body: imgData,
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					// console.log(data);
+					setImage(data.url);
+					setImageChanging(false);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			return;
+		}
 	};
 
 	const formik = useFormik({
@@ -133,11 +161,7 @@ export default function Profile() {
 								}}
 							>
 								<img
-									src={
-										imageChanging
-											? URL.createObjectURL(image)
-											: `http://localhost:5000/${image}`
-									}
+									src={image}
 									alt=""
 									style={{ height: "100%", width: "100%", borderRadius: "50%" }}
 								/>
@@ -146,7 +170,7 @@ export default function Profile() {
 								id="image"
 								type="file"
 								accept="image/*"
-								onChange={changeImage}
+								onChange={(e) => changeImage(e.target.files[0])}
 								style={{ display: "none" }}
 							/>
 						</label>
@@ -215,6 +239,7 @@ export default function Profile() {
 							<Button
 								type="submit"
 								variant="contained"
+								disabled={imageChanging}
 								sx={{
 									width: "100%",
 									backgroundColor: "primary.main",

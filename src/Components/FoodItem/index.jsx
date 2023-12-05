@@ -26,7 +26,7 @@ export default function FoodItem(props) {
 					}}
 				>
 					<img
-						src={`http://localhost:5000/${foodItem?.foodImage}`}
+						src={foodItem?.foodImage}
 						alt=""
 						style={{ height: "65%", width: "100%", borderRadius: "9px" }}
 					/>

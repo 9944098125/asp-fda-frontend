@@ -192,7 +192,7 @@ export default function RestaurantItem(props) {
 						>
 							<Box sx={{ width: "75%", height: "150%%", borderRadius: "12px" }}>
 								<img
-									src={`http://localhost:5000/${restaurant?.logo}`}
+									src={restaurant?.logo}
 									alt=""
 									style={{
 										height: "100%",

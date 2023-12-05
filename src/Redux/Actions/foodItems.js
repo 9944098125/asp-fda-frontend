@@ -27,7 +27,7 @@ export const createFoodItem = (body, restaurantId) => async (dispatch) => {
 			body,
 			{
 				headers: {
-					"Content-Type": "multipart/form-data",
+					"Content-Type": "application/json",
 				},
 			},
 		);
@@ -121,7 +121,7 @@ export const updateFood =
 				body,
 				{
 					headers: {
-						"Content-Type": "multipart/form-data",
+						"Content-Type": "application/json",
 					},
 				},
 			);
