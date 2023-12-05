@@ -71,6 +71,7 @@ export default function FoodItemModal(props) {
 				foodImage: foodImage,
 			};
 			dispatch(createFoodItem(body, params.id));
+			resetForm();
 		},
 	});
 	React.useEffect(() => {

@@ -11,9 +11,6 @@ body {
 	width: 50%;
 	background-color: transparent;
 }
-#outlet::-webkit-scrollbar {
-	display: none;
-}
 .login-fields {
 	width: 100%;
 	background-color: transparent;
