@@ -7,28 +7,29 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 export default function SideNav() {
-  const SidebarState = useSelector((state) => state.sidebar);
-  return (
-    <React.Fragment>
-      <Box sx={{ height: "100vh" }}>
-        {/* navbar */}
-        <Navbar />
-        <Box sx={{ display: "flex", width: "100%" }}>
-          {/* sidebar */}
-          <Sidebar />
-          <Box
-            id="outlet"
-            sx={{
-              paddingTop: "80px",
-              overflowY: "scroll",
-              width: "100%",
-              pl: { xs: "80px", md: SidebarState.open ? "285px" : "105px" },
-              pt: { xs: "60px", md: "70px" },
-            }}>
-            <Outlet />
-          </Box>
-        </Box>
-      </Box>
-    </React.Fragment>
-  );
+	const SidebarState = useSelector((state) => state.sidebar);
+	return (
+		<React.Fragment>
+			<Box sx={{ minHeight: "100vh" }}>
+				{/* navbar */}
+				<Navbar />
+				<Box sx={{ display: "flex", width: "100%" }}>
+					{/* sidebar */}
+					<Sidebar />
+					<Box
+						id="outlet"
+						sx={{
+							paddingTop: "80px",
+							overflowY: "scroll",
+							width: "100%",
+							pl: { xs: "80px", md: SidebarState.open ? "285px" : "105px" },
+							pt: { xs: "60px", md: "70px" },
+						}}
+					>
+						<Outlet />
+					</Box>
+				</Box>
+			</Box>
+		</React.Fragment>
+	);
 }
