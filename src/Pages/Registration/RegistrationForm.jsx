@@ -354,6 +354,19 @@ function RegistrationForm(props) {
 							gap: { xs: 2, md: 6 },
 						}}
 					>
+						<Input
+							variant="standard"
+							label="Phone Number"
+							type="text"
+							name="phone"
+							value={formik.values.phone}
+							className={
+								formik.touched.phone && Boolean(formik.errors.phone)
+									? "form-control is-invalid location-fields"
+									: "form-control location-fields"
+							}
+							formik={formik}
+						/>
 						<TextField
 							multiline
 							rows={4}

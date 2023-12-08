@@ -25,6 +25,7 @@ const validationSchema = Yup.object({
 		.required("Confirm Your Password")
 		.oneOf([Yup.ref("password"), null], "Your Passwords are not matching"),
 	address: Yup.string().required("Address is required"),
+	phone: Yup.string().required("Phone is required..."),
 });
 
 export default function Registration() {
@@ -87,6 +88,7 @@ export default function Registration() {
 				country: "",
 			},
 			address: "",
+			phone: "",
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
@@ -101,6 +103,7 @@ export default function Registration() {
 				image: image,
 				isRestaurantOwner: isRestaurantOwner,
 				deliveryAddress: values.address,
+				phone: values.phone,
 			};
 			// console.log(image);
 			dispatch(registration(body));
