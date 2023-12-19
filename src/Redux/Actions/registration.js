@@ -21,6 +21,7 @@ export const registration = (body) => async (dispatch) => {
 				type: REGISTRATION_SUCCESS,
 				payload: res.data?.message,
 			});
+			console.log(res);
 			dispatch(alertActions.success(res.data?.message));
 			setTimeout(() => {
 				dispatch(alertActions.clear());
