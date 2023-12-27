@@ -47,16 +47,14 @@ function Sidebar() {
 					position: "fixed",
 					top: "0",
 					bottom: "0",
-				}}
-			>
+				}}>
 				<Box
 					sx={{
 						backgroundColor: darkTheme.dark ? "secondary.main" : "primary.main",
 						width: "100%",
 						height: "100vh",
 						borderRight: "2px solid black",
-					}}
-				>
+					}}>
 					{/* sidebar content with list of sidebar links */}
 					<List sx={{ p: 1.5, pt: 10 }}>
 						{user?.isRestaurantOwner &&
@@ -64,8 +62,7 @@ function Sidebar() {
 								<Link
 									key={idx}
 									to={item.link}
-									style={{ textDecoration: "none", color: "inherit" }}
-								>
+									style={{ textDecoration: "none", color: "inherit" }}>
 									<ListItem
 										sx={{
 											display: "flex",
@@ -76,8 +73,7 @@ function Sidebar() {
 												backgroundColor: "white",
 												borderRadius: "8px",
 											},
-										}}
-									>
+										}}>
 										<ListItemButton sx={{}}>
 											<ListItemIcon>{item.icon}</ListItemIcon>
 											<ListItemText
@@ -86,8 +82,7 @@ function Sidebar() {
 														xs: "none",
 														md: SidebarState.open ? "block" : "none",
 													},
-												}}
-											>
+												}}>
 												{item.text}
 											</ListItemText>
 										</ListItemButton>
@@ -99,8 +94,7 @@ function Sidebar() {
 								<Link
 									key={idx}
 									to={item.link}
-									style={{ textDecoration: "none", color: "inherit" }}
-								>
+									style={{ textDecoration: "none", color: "inherit" }}>
 									<ListItem
 										sx={{
 											display: "flex",
@@ -111,8 +105,7 @@ function Sidebar() {
 												backgroundColor: "white",
 												borderRadius: "8px",
 											},
-										}}
-									>
+										}}>
 										<ListItemButton sx={{}}>
 											<ListItemIcon>{item.icon}</ListItemIcon>
 											<ListItemText
@@ -121,8 +114,7 @@ function Sidebar() {
 														xs: "none",
 														md: SidebarState.open ? "block" : "none",
 													},
-												}}
-											>
+												}}>
 												{item.text}
 											</ListItemText>
 										</ListItemButton>
@@ -132,8 +124,7 @@ function Sidebar() {
 						{!user?.isRestaurantOwner && user && (
 							<Link
 								to="/cart"
-								style={{ textDecoration: "none", color: "inherit" }}
-							>
+								style={{ textDecoration: "none", color: "inherit" }}>
 								<ListItem
 									sx={{
 										display: "flex",
@@ -144,8 +135,7 @@ function Sidebar() {
 											backgroundColor: "white",
 											borderRadius: "8px",
 										},
-									}}
-								>
+									}}>
 									<ListItemButton sx={{}}>
 										<ListItemIcon>
 											<ShoppingBasketIcon />
@@ -156,9 +146,8 @@ function Sidebar() {
 													xs: "none",
 													md: SidebarState.open ? "block" : "none",
 												},
-											}}
-										>
-											Cart {CartItems.items.length}
+											}}>
+											Cart 🛒
 										</ListItemText>
 									</ListItemButton>
 								</ListItem>
@@ -176,8 +165,7 @@ function Sidebar() {
 										backgroundColor: "white",
 										borderRadius: "8px",
 									},
-								}}
-							>
+								}}>
 								<ListItemButton sx={{}}>
 									<ListItemIcon>
 										<LogoutIcon />
@@ -188,8 +176,7 @@ function Sidebar() {
 												xs: "none",
 												md: SidebarState.open ? "block" : "none",
 											},
-										}}
-									>
+										}}>
 										Logout
 									</ListItemText>
 								</ListItemButton>
@@ -214,15 +201,13 @@ function Sidebar() {
 						cursor: "pointer",
 						border: "2px solid black",
 						ml: -0.2,
-					}}
-				>
+					}}>
 					<Typography
 						sx={{
 							color: "white",
 							fontSize: "50px",
 							display: { sm: "none", md: "block" },
-						}}
-					>
+						}}>
 						{SidebarState.open ? "<" : ">"}
 					</Typography>
 				</Box>

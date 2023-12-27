@@ -9,40 +9,40 @@ import ModeStandbyIcon from "@mui/icons-material/ModeStandby";
 export const customerItems = [
 	{
 		icon: <HomeIcon />,
-		text: "Home",
+		text: "Home 🏡",
 		link: "/",
 	},
 	{
 		icon: <RestaurantIcon />,
-		text: "Restaurants",
+		text: "Restaurants 🍽️",
 		link: "/restaurants",
 	},
-	{
-		icon: <ModeStandbyIcon />,
-		text: "Power Bi",
-		link: "/power-bi",
-	},
+	// {
+	// 	icon: <ModeStandbyIcon />,
+	// 	text: "Power Bi",
+	// 	link: "/power-bi",
+	// },
 ];
 
 export const restaurantOwnerItems = [
 	{
 		icon: <HomeIcon />,
-		text: "Home",
+		text: "Home 🏡",
 		link: "/",
 	},
 	{
 		icon: <RestaurantIcon />,
-		text: "Restaurants",
+		text: "Restaurants 🍽️",
 		link: "/restaurants",
 	},
 	{
 		icon: <AddCircleOutlineIcon />,
-		text: "Create Restaurant",
+		text: "Create Restaurant ➕",
 		link: "/createRestaurant",
 	},
-	{
-		icon: <ModeStandbyIcon />,
-		text: "Power Bi",
-		link: "/power-bi",
-	},
+	// {
+	// 	icon: <ModeStandbyIcon />,
+	// 	text: "Power Bi",
+	// 	link: "/power-bi",
+	// },
 ];
