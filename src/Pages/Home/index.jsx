@@ -24,7 +24,7 @@ export default function Home() {
 	const SidebarState = useSelector((state) => state.sidebar);
 
 	const filteredFoodItems = FoodItemsState.foodItems?.filter((item) =>
-		item?.name.toLowerCase().includes(searchTerm.toLowerCase()),
+		item?.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
 	return (
@@ -37,8 +37,7 @@ export default function Home() {
 					backgroundColor: darkTheme.dark ? "secondary.dark" : "primary.bg",
 					display: "flex",
 					justifyContent: "center",
-				}}
-			>
+				}}>
 				<TextField
 					InputProps={{ style: { color: darkTheme.dark ? "white" : "" } }}
 					name="search"
@@ -60,8 +59,7 @@ export default function Home() {
 					flexWrap: "wrap",
 					gap: SidebarState.open ? 1 : 1.5,
 					p: 2,
-				}}
-			>
+				}}>
 				{filteredFoodItems.length > 0 ? (
 					filteredFoodItems.map((item, idx) => (
 						<FoodItem foodItem={item} idx={idx} key={idx} />
@@ -74,8 +72,7 @@ export default function Home() {
 							alignItems: "center",
 							width: "100%",
 							height: "100vh",
-						}}
-					>
+						}}>
 						<Typography sx={{ fontWeight: "700", fontSize: "25px" }}>
 							Sorry, No Food Items
 						</Typography>

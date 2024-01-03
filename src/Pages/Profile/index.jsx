@@ -73,6 +73,7 @@ export default function Profile() {
 		initialValues: {
 			userName: "",
 			email: "",
+			phone: "",
 			location: {
 				city: "",
 				country: "",
@@ -88,6 +89,7 @@ export default function Profile() {
 					country: values.location?.country,
 				},
 				image: image,
+				phone: values.phone,
 				deliveryAddress: values.address,
 			};
 			// console.log(body);
@@ -130,6 +132,7 @@ export default function Profile() {
 					city: UsersState.user.location?.city,
 					country: UsersState.user.location?.country,
 				},
+				phone: UsersState.user.phone,
 				address: UsersState.user.deliveryAddress,
 			});
 		}
@@ -143,8 +146,7 @@ export default function Profile() {
 					width="100%"
 					height="90vh"
 					p={3}
-					backgroundColor={darkTheme.dark ? "secondary.dark" : "primary.bg"}
-				>
+					backgroundColor={darkTheme.dark ? "secondary.dark" : "primary.bg"}>
 					{AlertState.message && <ResponseModal show={true} />}
 					<Box sx={{ width: "50%", height: "100%" }}>
 						<label htmlFor="image">
@@ -158,8 +160,7 @@ export default function Profile() {
 									p: 5,
 									borderRadius: "50%",
 									border: "10px solid teal",
-								}}
-							>
+								}}>
 								<img
 									src={image}
 									alt=""
@@ -194,6 +195,17 @@ export default function Profile() {
 								type="text"
 								name="email"
 								value={formik.values.email}
+								onChange={formik.handleChange}
+								variant="outlined"
+							/>
+						</Box>
+
+						<Box sx={{ width: "100%", p: 1.5, mb: 3 }}>
+							<TextField
+								sx={{ width: "100%" }}
+								type="text"
+								name="phone"
+								value={formik.values.phone}
 								onChange={formik.handleChange}
 								variant="outlined"
 							/>
@@ -246,8 +258,7 @@ export default function Profile() {
 									color: "white",
 									height: "45px",
 									mb: 3,
-								}}
-							>
+								}}>
 								Update
 							</Button>
 							<Button
@@ -262,8 +273,7 @@ export default function Profile() {
 									"&:hover": {
 										backgroundColor: "darkred",
 									},
-								}}
-							>
+								}}>
 								Delete my Account
 							</Button>
 							<DeleteModal
