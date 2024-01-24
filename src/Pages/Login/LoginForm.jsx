@@ -28,8 +28,7 @@ function LoginForm(props) {
 					border: " 2px solid rgba(255, 255, 255, 0.3)",
 					minHeight: "40vh",
 					width: { xs: "90%", md: "50%" },
-				}}
-			>
+				}}>
 				<Heading
 					head="Login"
 					span="Don't have an account ? Please "
@@ -105,8 +104,7 @@ function LoginForm(props) {
 									height: "50px",
 									color: "white",
 								},
-							}}
-						>
+							}}>
 							Login
 						</Button>
 					</Box>

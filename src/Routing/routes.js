@@ -11,6 +11,7 @@ import ParticularFoodItem from "../Pages/Restaurants/FoodItems/ParticularFoodIte
 import Profile from "../Pages/Profile";
 import Cart from "../Pages/Cart";
 import PowerBi from "../Pages/PowerBi";
+import Ssrs from "../Pages/SSRS";
 
 const router = createBrowserRouter([
 	{
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
 			{
 				path: "/power-bi",
 				element: <PowerBi />,
+			},
+			{
+				path: "/ssrs",
+				element: <Ssrs />,
 			},
 		],
 	},
