@@ -4,8 +4,7 @@
 import HomeIcon from "@mui/icons-material/Home";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import ModeStandbyIcon from "@mui/icons-material/ModeStandby";
-import AssessmentIcon from "@mui/icons-material/Assessment";
+
 
 export const customerItems = [
 	{
@@ -17,16 +16,6 @@ export const customerItems = [
 		icon: <RestaurantIcon />,
 		text: "Restaurants 🍽️",
 		link: "/restaurants",
-	},
-	{
-		icon: <ModeStandbyIcon />,
-		text: "Power Bi",
-		link: "/power-bi",
-	},
-	{
-		icon: <AssessmentIcon />,
-		text: "SSRS",
-		link: "/ssrs",
 	},
 ];
 
